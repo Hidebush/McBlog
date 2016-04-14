@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB11CBFF009000954D8 /* AppDelegate.swift */; };
 		AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB31CBFF009000954D8 /* ViewController.swift */; };
-		AA777CB71CBFF009000954D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA777CB51CBFF009000954D8 /* Main.storyboard */; };
 		AA777CB91CBFF009000954D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA777CB81CBFF009000954D8 /* Assets.xcassets */; };
 		AA777CC71CBFF009000954D8 /* McBlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CC61CBFF009000954D8 /* McBlogTests.swift */; };
 		AA777CD21CBFF009000954D8 /* McBlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CD11CBFF009000954D8 /* McBlogUITests.swift */; };
+		AAE58E491CBFFB7D00FBB54D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E481CBFFB7D00FBB54D /* MainViewController.swift */; };
+		AAE58E4B1CBFFB9B00FBB54D /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E4A1CBFFB9B00FBB54D /* HomeTableViewController.swift */; };
+		AAE58E4D1CBFFBA900FBB54D /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E4C1CBFFBA900FBB54D /* MessageTableViewController.swift */; };
+		AAE58E4F1CBFFBCC00FBB54D /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E4E1CBFFBCC00FBB54D /* DiscoverTableViewController.swift */; };
+		AAE58E511CBFFBDB00FBB54D /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E501CBFFBDB00FBB54D /* ProfileTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,17 +38,22 @@
 
 /* Begin PBXFileReference section */
 		AA777CAE1CBFF009000954D8 /* McBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = McBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA777CB11CBFF009000954D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA777CB11CBFF009000954D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		AA777CB31CBFF009000954D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		AA777CB61CBFF009000954D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA777CB81CBFF009000954D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AA777CBD1CBFF009000954D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA777CBD1CBFF009000954D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		AA777CC21CBFF009000954D8 /* McBlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = McBlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA777CC61CBFF009000954D8 /* McBlogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = McBlogTests.swift; sourceTree = "<group>"; };
 		AA777CC81CBFF009000954D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA777CCD1CBFF009000954D8 /* McBlogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = McBlogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA777CD11CBFF009000954D8 /* McBlogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = McBlogUITests.swift; sourceTree = "<group>"; };
 		AA777CD31CBFF009000954D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAE58E481CBFFB7D00FBB54D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		AAE58E4A1CBFFB9B00FBB54D /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		AAE58E4C1CBFFBA900FBB54D /* MessageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
+		AAE58E4E1CBFFBCC00FBB54D /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
+		AAE58E501CBFFBDB00FBB54D /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		AAE58E531CC0057100FBB54D /* McBlog.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = McBlog.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,11 +104,10 @@
 		AA777CB01CBFF009000954D8 /* McBlog */ = {
 			isa = PBXGroup;
 			children = (
-				AA777CB11CBFF009000954D8 /* AppDelegate.swift */,
+				AAE58E3D1CBFFA3900FBB54D /* Classes */,
 				AA777CB31CBFF009000954D8 /* ViewController.swift */,
-				AA777CB51CBFF009000954D8 /* Main.storyboard */,
 				AA777CB81CBFF009000954D8 /* Assets.xcassets */,
-				AA777CBD1CBFF009000954D8 /* Info.plist */,
+				AAE58E521CC0054900FBB54D /* Other */,
 			);
 			path = McBlog;
 			sourceTree = "<group>";
@@ -120,6 +128,92 @@
 				AA777CD31CBFF009000954D8 /* Info.plist */,
 			);
 			path = McBlogUITests;
+			sourceTree = "<group>";
+		};
+		AAE58E3D1CBFFA3900FBB54D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E3E1CBFFA3900FBB54D /* Model */,
+				AAE58E3F1CBFFA3900FBB54D /* Module */,
+				AAE58E451CBFFA3900FBB54D /* Tools */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		AAE58E3E1CBFFA3900FBB54D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AAE58E3F1CBFFA3900FBB54D /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E421CBFFA3900FBB54D /* Main */,
+				AAE58E411CBFFA3900FBB54D /* Home */,
+				AAE58E431CBFFA3900FBB54D /* Message */,
+				AAE58E401CBFFA3900FBB54D /* Discover */,
+				AAE58E441CBFFA3900FBB54D /* Profile */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		AAE58E401CBFFA3900FBB54D /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E4E1CBFFBCC00FBB54D /* DiscoverTableViewController.swift */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		AAE58E411CBFFA3900FBB54D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E4A1CBFFB9B00FBB54D /* HomeTableViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AAE58E421CBFFA3900FBB54D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E481CBFFB7D00FBB54D /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		AAE58E431CBFFA3900FBB54D /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E4C1CBFFBA900FBB54D /* MessageTableViewController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		AAE58E441CBFFA3900FBB54D /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E501CBFFBDB00FBB54D /* ProfileTableViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		AAE58E451CBFFA3900FBB54D /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		AAE58E521CC0054900FBB54D /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				AA777CB11CBFF009000954D8 /* AppDelegate.swift */,
+				AAE58E531CC0057100FBB54D /* McBlog.pch */,
+				AA777CBD1CBFF009000954D8 /* Info.plist */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +322,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA777CB91CBFF009000954D8 /* Assets.xcassets in Resources */,
-				AA777CB71CBFF009000954D8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,7 +346,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE58E511CBFFBDB00FBB54D /* ProfileTableViewController.swift in Sources */,
+				AAE58E4B1CBFFB9B00FBB54D /* HomeTableViewController.swift in Sources */,
+				AAE58E491CBFFB7D00FBB54D /* MainViewController.swift in Sources */,
+				AAE58E4D1CBFFBA900FBB54D /* MessageTableViewController.swift in Sources */,
 				AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */,
+				AAE58E4F1CBFFBCC00FBB54D /* DiscoverTableViewController.swift in Sources */,
 				AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,17 +386,6 @@
 			targetProxy = AA777CCE1CBFF009000954D8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		AA777CB51CBFF009000954D8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA777CB61CBFF009000954D8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AA777CD41CBFF009000954D8 /* Debug */ = {
@@ -389,12 +476,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/McBlog/Other/McBlog.pch";
 				INFOPLIST_FILE = McBlog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Theshy.McBlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/McBlog/Other/McBlog.pch";
 			};
 			name = Debug;
 		};
@@ -405,12 +495,15 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/McBlog/Other/McBlog.pch";
 				INFOPLIST_FILE = McBlog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Theshy.McBlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/McBlog/Other/McBlog.pch";
 			};
 			name = Release;
 		};
@@ -481,6 +574,7 @@
 				AA777CD81CBFF009000954D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA777CD91CBFF009000954D8 /* Build configuration list for PBXNativeTarget "McBlogTests" */ = {
 			isa = XCConfigurationList;
@@ -489,6 +583,7 @@
 				AA777CDB1CBFF009000954D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA777CDC1CBFF009000954D8 /* Build configuration list for PBXNativeTarget "McBlogUITests" */ = {
 			isa = XCConfigurationList;
@@ -497,6 +592,7 @@
 				AA777CDE1CBFF009000954D8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
