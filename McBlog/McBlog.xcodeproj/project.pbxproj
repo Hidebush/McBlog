@@ -11,7 +11,6 @@
 		AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB31CBFF009000954D8 /* ViewController.swift */; };
 		AA777CB71CBFF009000954D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA777CB51CBFF009000954D8 /* Main.storyboard */; };
 		AA777CB91CBFF009000954D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA777CB81CBFF009000954D8 /* Assets.xcassets */; };
-		AA777CBC1CBFF009000954D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA777CBA1CBFF009000954D8 /* LaunchScreen.storyboard */; };
 		AA777CC71CBFF009000954D8 /* McBlogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CC61CBFF009000954D8 /* McBlogTests.swift */; };
 		AA777CD21CBFF009000954D8 /* McBlogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CD11CBFF009000954D8 /* McBlogUITests.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +38,6 @@
 		AA777CB31CBFF009000954D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		AA777CB61CBFF009000954D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA777CB81CBFF009000954D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AA777CBB1CBFF009000954D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA777CBD1CBFF009000954D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA777CC21CBFF009000954D8 /* McBlogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = McBlogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA777CC61CBFF009000954D8 /* McBlogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = McBlogTests.swift; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 				AA777CB31CBFF009000954D8 /* ViewController.swift */,
 				AA777CB51CBFF009000954D8 /* Main.storyboard */,
 				AA777CB81CBFF009000954D8 /* Assets.xcassets */,
-				AA777CBA1CBFF009000954D8 /* LaunchScreen.storyboard */,
 				AA777CBD1CBFF009000954D8 /* Info.plist */,
 			);
 			path = McBlog;
@@ -230,7 +227,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA777CBC1CBFF009000954D8 /* LaunchScreen.storyboard in Resources */,
 				AA777CB91CBFF009000954D8 /* Assets.xcassets in Resources */,
 				AA777CB71CBFF009000954D8 /* Main.storyboard in Resources */,
 			);
@@ -300,14 +296,6 @@
 				AA777CB61CBFF009000954D8 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AA777CBA1CBFF009000954D8 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AA777CBB1CBFF009000954D8 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -398,9 +386,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
 				INFOPLIST_FILE = McBlog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Theshy.McBlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -412,9 +402,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
 				INFOPLIST_FILE = McBlog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Theshy.McBlog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
