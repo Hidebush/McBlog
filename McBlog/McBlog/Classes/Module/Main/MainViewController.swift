@@ -48,7 +48,7 @@ class MainViewController: UITabBarController {
     }
     
     func composeBtnClick() {
-        print("按钮点击...")
+        print(__FUNCTION__)
     }
     
     

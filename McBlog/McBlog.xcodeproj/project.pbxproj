@@ -17,6 +17,7 @@
 		AAE58E4D1CBFFBA900FBB54D /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E4C1CBFFBA900FBB54D /* MessageTableViewController.swift */; };
 		AAE58E4F1CBFFBCC00FBB54D /* DiscoverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E4E1CBFFBCC00FBB54D /* DiscoverTableViewController.swift */; };
 		AAE58E511CBFFBDB00FBB54D /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E501CBFFBDB00FBB54D /* ProfileTableViewController.swift */; };
+		AAE58E581CC0B60100FBB54D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE58E571CC0B60100FBB54D /* BaseTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		AAE58E4E1CBFFBCC00FBB54D /* DiscoverTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverTableViewController.swift; sourceTree = "<group>"; };
 		AAE58E501CBFFBDB00FBB54D /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		AAE58E531CC0057100FBB54D /* McBlog.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = McBlog.pch; sourceTree = "<group>"; };
+		AAE58E571CC0B60100FBB54D /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		AAE58E3F1CBFFA3900FBB54D /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				AAE58E561CC0B5F700FBB54D /* Base */,
 				AAE58E421CBFFA3900FBB54D /* Main */,
 				AAE58E411CBFFA3900FBB54D /* Home */,
 				AAE58E431CBFFA3900FBB54D /* Message */,
@@ -214,6 +217,14 @@
 				AA777CBD1CBFF009000954D8 /* Info.plist */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		AAE58E561CC0B5F700FBB54D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				AAE58E571CC0B60100FBB54D /* BaseTableViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +359,7 @@
 			files = (
 				AAE58E511CBFFBDB00FBB54D /* ProfileTableViewController.swift in Sources */,
 				AAE58E4B1CBFFB9B00FBB54D /* HomeTableViewController.swift in Sources */,
+				AAE58E581CC0B60100FBB54D /* BaseTableViewController.swift in Sources */,
 				AAE58E491CBFFB7D00FBB54D /* MainViewController.swift in Sources */,
 				AAE58E4D1CBFFBA900FBB54D /* MessageTableViewController.swift in Sources */,
 				AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */,

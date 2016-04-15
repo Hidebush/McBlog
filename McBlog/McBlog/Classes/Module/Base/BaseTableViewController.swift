@@ -1,5 +1,5 @@
 //
-//  HomeTableViewController.swift
+//  BaseTableViewController.swift
 //  McBlog
 //
 //  Created by Theshy on 16/4/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeTableViewController: BaseTableViewController {
+class BaseTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
