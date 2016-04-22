@@ -13,6 +13,9 @@ class BaseTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        var isLogin: Bool = false
+        view = isLogin ? UIView() : VistorLoginView()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

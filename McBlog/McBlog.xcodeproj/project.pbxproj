@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		845193AA1CC0C1BF0084436E /* VistorLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845193A91CC0C1BF0084436E /* VistorLoginView.swift */; };
 		AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB11CBFF009000954D8 /* AppDelegate.swift */; };
 		AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB31CBFF009000954D8 /* ViewController.swift */; };
 		AA777CB91CBFF009000954D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA777CB81CBFF009000954D8 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		845193A91CC0C1BF0084436E /* VistorLoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VistorLoginView.swift; sourceTree = "<group>"; };
 		AA777CAE1CBFF009000954D8 /* McBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = McBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA777CB11CBFF009000954D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		AA777CB31CBFF009000954D8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				AAE58E481CBFFB7D00FBB54D /* MainViewController.swift */,
+				845193A91CC0C1BF0084436E /* VistorLoginView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				AAE58E4D1CBFFBA900FBB54D /* MessageTableViewController.swift in Sources */,
 				AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */,
 				AAE58E4F1CBFFBCC00FBB54D /* DiscoverTableViewController.swift in Sources */,
+				845193AA1CC0C1BF0084436E /* VistorLoginView.swift in Sources */,
 				AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -48,7 +48,7 @@ class MainViewController: UITabBarController {
     }
     
     func composeBtnClick() {
-        print(__FUNCTION__)
+        print(#function)
     }
     
     
@@ -58,7 +58,7 @@ class MainViewController: UITabBarController {
         button .setImage(UIImage(named: "tabbar_compose_icon_highlighted"), forState: UIControlState.Highlighted)
         button.setBackgroundImage(UIImage(named: "tabbar_compose_button"), forState: UIControlState.Normal)
         button.setBackgroundImage(UIImage(named: "tabbar_compose_button_highlighted"), forState: UIControlState.Highlighted)
-        button.addTarget(self, action: "composeBtnClick", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(composeBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.tabBar.addSubview(button)
         
