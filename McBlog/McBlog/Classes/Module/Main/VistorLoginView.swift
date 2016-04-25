@@ -45,7 +45,7 @@ class VistorLoginView: UIView {
         bottomL.text = message
         homeIconView.hidden = !isHome
         
-        isHome ? startAnimation() : sendSubviewToBack(homeIconView)
+        isHome ? startAnimation() : sendSubviewToBack(maskIconView)
     }
     
     
