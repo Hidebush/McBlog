@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BaseTableViewController: UITableViewController {
+class BaseTableViewController: UITableViewController, VistorLoginViewDelegate {
 
     var isLogin: Bool = false
     var visitorView: VistorLoginView?
@@ -19,6 +19,9 @@ class BaseTableViewController: UITableViewController {
     
     func setUpVisitorLoginView() {
         visitorView = VistorLoginView()
+        visitorView?.delegate = self
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(visitorLoginViewWillRegister))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "登录", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(visitorLoginViewWillLogin))
         view = visitorView
     }
     
@@ -30,6 +33,17 @@ class BaseTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        
+        
+    }
+    
+    func visitorLoginViewWillLogin() {
+        print("登陆--")
+    }
+    
+    func visitorLoginViewWillRegister() {
+        print("注册--")
     }
 
     override func didReceiveMemoryWarning() {

@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol VistorLoginViewDelegate: NSObjectProtocol {
+    func visitorLoginViewWillLogin()
+    func visitorLoginViewWillRegister()
+}
+
 class VistorLoginView: UIView {
 
     /*
@@ -17,6 +22,23 @@ class VistorLoginView: UIView {
         // Drawing code
     }
     */
+    
+    weak var delegate: VistorLoginViewDelegate?
+    
+    /**
+     注册
+     */
+    func loginBtnClick() {
+        delegate?.visitorLoginViewWillLogin()
+    }
+    
+    /**
+     登陆
+     */
+    func registerBtnClick() {
+        delegate?.visitorLoginViewWillRegister()
+    }
+    
     
     func setUpVisitView(isHome: Bool, imageName:String, message:String) {
         iconView.image = UIImage(named: imageName)
@@ -130,9 +152,10 @@ class VistorLoginView: UIView {
     
     private lazy var loginBtn: UIButton = {
         let button = UIButton()
-        button.setTitle("登陆", forState: UIControlState.Normal)
+        button.setTitle("登录", forState: UIControlState.Normal)
         button.setBackgroundImage(UIImage(named: "common_button_white_disable"), forState: UIControlState.Normal)
         button.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(loginBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
         return button
     }()
     
@@ -141,6 +164,7 @@ class VistorLoginView: UIView {
         button.setTitle("注册", forState: UIControlState.Normal)
         button.setBackgroundImage(UIImage(named: "common_button_white_disable"), forState: UIControlState.Normal)
         button.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+        button.addTarget(self, action: #selector(registerBtnClick), forControlEvents: UIControlEvents.TouchUpInside)
         return button
     }()
 }
