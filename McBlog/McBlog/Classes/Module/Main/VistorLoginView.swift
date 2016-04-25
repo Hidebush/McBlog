@@ -18,6 +18,15 @@ class VistorLoginView: UIView {
     }
     */
     
+    func setUpVisitView(isHome: Bool, imageName:String, message:String) {
+        iconView.image = UIImage(named: imageName)
+        bottomL.text = message
+        homeIconView.hidden = !isHome
+        
+        isHome ? startAnimation() : sendSubviewToBack(homeIconView)
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpUI()
@@ -32,7 +41,11 @@ class VistorLoginView: UIView {
     }
     
     private func setUpUI() {
+        
+        backgroundColor = UIColor(white: 237.0/255.0, alpha: 1.0)
+        
         addSubview(iconView)
+        addSubview(maskIconView)
         addSubview(homeIconView)
         addSubview(bottomL)
         addSubview(loginBtn)
@@ -41,7 +54,6 @@ class VistorLoginView: UIView {
         iconView.translatesAutoresizingMaskIntoConstraints = false;
         addConstraint(NSLayoutConstraint(item: iconView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: iconView, attribute: NSLayoutAttribute.CenterY, relatedBy: .Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0))
-        
         
         homeIconView.translatesAutoresizingMaskIntoConstraints = false;
         addConstraint(NSLayoutConstraint(item: homeIconView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: iconView, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
@@ -65,8 +77,26 @@ class VistorLoginView: UIView {
         addConstraint(NSLayoutConstraint(item: loginBtn, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 35))
         
         
+        maskIconView.translatesAutoresizingMaskIntoConstraints = false
+        //        addConstraint(NSLayoutConstraint(item: maskIconView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1.0, constant: 0))
+        //        addConstraint(NSLayoutConstraint(item: maskIconView, attribute: NSLayoutAttribute.CenterY, relatedBy: .Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0))
+
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[subView]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["subView": maskIconView]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[subView]-(-65)-[regBtn]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["subView": maskIconView,"regBtn": registerBtn]))
+        
+        
     }
     
+    
+    private func startAnimation() {
+        let anim = CABasicAnimation()
+        anim.keyPath = "transform.rotation"
+        anim.toValue = 2 * M_PI
+        anim.duration = 20.0
+        anim.repeatCount = MAXFLOAT
+        anim.removedOnCompletion = false
+        iconView.layer.addAnimation(anim, forKey: nil)
+    }
     
     /**
      *  LAZY
@@ -77,6 +107,11 @@ class VistorLoginView: UIView {
         return iv
     }()
     
+    private lazy var maskIconView: UIImageView = {
+        let mv : UIImageView = UIImageView(image: UIImage(named: "visitordiscover_feed_mask_smallicon"))
+        return mv
+    }()
+    
     private lazy var homeIconView: UIImageView = {
         let hiV: UIImageView = UIImageView(image: UIImage(named: "visitordiscover_feed_image_house"))
         return hiV
@@ -85,6 +120,8 @@ class VistorLoginView: UIView {
     private lazy var bottomL: UILabel = {
         let lb = UILabel()
         lb.text = "关注一些人，回这里看看有什么惊喜"
+        lb.numberOfLines = 0
+        lb.textAlignment = NSTextAlignment.Center
         lb.textColor = UIColor.darkGrayColor()
         lb.font = UIFont.systemFontOfSize(14)
         lb.sizeToFit()

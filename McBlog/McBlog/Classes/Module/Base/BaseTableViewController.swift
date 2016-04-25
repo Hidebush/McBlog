@@ -10,11 +10,20 @@ import UIKit
 
 class BaseTableViewController: UITableViewController {
 
+    var isLogin: Bool = false
+    var visitorView: VistorLoginView?
+    override func loadView() {
+        isLogin ? super.loadView() : setUpVisitorLoginView()
+        
+    }
+    
+    func setUpVisitorLoginView() {
+        visitorView = VistorLoginView()
+        view = visitorView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        var isLogin: Bool = false
-        view = isLogin ? UIView() : VistorLoginView()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
