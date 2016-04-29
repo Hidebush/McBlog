@@ -78,26 +78,38 @@ class OAuthViewController: UIViewController, UIWebViewDelegate{
         NetWorkTools.shareTools.loadAccessToken(code) { (result, error) in
             if error != nil {
                 print(error)
-                SVProgressHUD.showErrorWithStatus("网络不好哦~")
-                SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.Dark)
-                
-                let when = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * NSEC_PER_SEC))
-                dispatch_after(when, dispatch_get_main_queue()) {
-                    self.closeAction()
-                }
+                self.closeVC("网络不好哦~")
                 
                 return
             } else {
                 SVProgressHUD.dismiss()
                 print(result)
                 if result != nil {
-                    let userAccount = UserAccount(dict: result!)
-                    userAccount.saveAccount()
-                    print(userAccount)
+                    UserAccount(dict: result!).loadUserInfo({ (error) in
+                        if error != nil {
+                            print(error)
+                            self.closeVC("加载用户信息失败~")
+                        }
+                    })
                 }
                 
             }
         }
+    }
+    
+    
+    private func closeVC(message: String) {
+        SVProgressHUD.showErrorWithStatus(message)
+        SVProgressHUD.setDefaultStyle(SVProgressHUDStyle.Dark)
+        
+        let when = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * NSEC_PER_SEC))
+        dispatch_after(when, dispatch_get_main_queue()) {
+            self.closeAction()
+        }
+    }
+    
+    deinit {
+        print("销毁")
     }
     
     override func didReceiveMemoryWarning() {

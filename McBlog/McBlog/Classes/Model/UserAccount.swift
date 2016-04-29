@@ -18,21 +18,15 @@ class UserAccount: NSObject, NSCoding {
         }
     }
     var uid: String?
+    // 用户头像
+    var avatar_large: String?
+    // 显示名字
+    var name: String?
     
     init(dict: [String: AnyObject]) {
         super.init()
         setValuesForKeysWithDictionary(dict)
 //        expireDate = NSDate(timeIntervalSinceNow: expires_in!)
-    }
-    
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {
-        
-    }
-    
-    override var description: String {
-        
-        let perporties = ["access_token", "expires_in", "expireDate", "uid"]
-        return "\(dictionaryWithValuesForKeys(perporties))"
     }
     
     // MARK: - 归档&解裆
@@ -76,11 +70,29 @@ class UserAccount: NSObject, NSCoding {
         return userAccount
     }
     
+    func loadUserInfo(finished: (error: NSError?) -> ()) {
+        NetWorkTools.shareTools.loadUserInfo(uid!) { (result, error) in
+            if error != nil {
+                finished(error: error)
+                return
+            }
+            
+            self.name = result!["name"] as? String
+            self.avatar_large = result!["avatar_large"] as? String
+            
+            self.saveAccount()
+            
+            finished(error: nil)
+        }
+    }
+    
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(access_token, forKey: "access_token")
         aCoder.encodeObject(expireDate, forKey: "expireDate")
         aCoder.encodeDouble(expires_in, forKey: "expires_in")
         aCoder.encodeObject(uid, forKey: "uid")
+        aCoder.encodeObject(name, forKey: "name")
+        aCoder.encodeObject(avatar_large, forKey: "avatar_large")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -88,7 +100,18 @@ class UserAccount: NSObject, NSCoding {
         expireDate = aDecoder.decodeObjectForKey("expireDate") as? NSDate
         expires_in = aDecoder.decodeDoubleForKey("expires_in")
         uid = aDecoder.decodeObjectForKey("uid") as? String
+        name = aDecoder.decodeObjectForKey("name") as? String
+        avatar_large = aDecoder.decodeObjectForKey("avatar_large") as? String
+    }
+    
+    override func setValue(value: AnyObject?, forUndefinedKey key: String) {
         
+    }
+    
+    override var description: String {
+        
+        let perporties = ["access_token", "expires_in", "expireDate", "uid", "name", "avatar_large"]
+        return "\(dictionaryWithValuesForKeys(perporties))"
     }
     
 }
