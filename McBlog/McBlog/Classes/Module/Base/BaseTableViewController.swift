@@ -10,7 +10,7 @@ import UIKit
 
 class BaseTableViewController: UITableViewController, VistorLoginViewDelegate {
 
-    var isLogin: Bool = false
+    var isLogin: Bool = UserAccount.loadAccount() != nil
     var visitorView: VistorLoginView?
     override func loadView() {
         isLogin ? super.loadView() : setUpVisitorLoginView()
@@ -40,6 +40,10 @@ class BaseTableViewController: UITableViewController, VistorLoginViewDelegate {
     
     func visitorLoginViewWillLogin() {
         print("登陆--")
+        let nav = UINavigationController(rootViewController: OAuthViewController())
+        navigationController?.presentViewController(nav, animated: true, completion: { 
+            
+        })
     }
     
     func visitorLoginViewWillRegister() {

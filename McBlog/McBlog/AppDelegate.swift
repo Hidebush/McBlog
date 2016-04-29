@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setUpAppearance()
         
+        
+        
         return true
     }
 
