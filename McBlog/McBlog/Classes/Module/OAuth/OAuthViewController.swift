@@ -85,6 +85,7 @@ class OAuthViewController: UIViewController, UIWebViewDelegate{
                 SVProgressHUD.dismiss()
                 print(result)
                 if result != nil {
+                    UserAccount(dict: result!).saveAccount()
                     UserAccount(dict: result!).loadUserInfo({ (error) in
                         if error != nil {
                             print(error)
