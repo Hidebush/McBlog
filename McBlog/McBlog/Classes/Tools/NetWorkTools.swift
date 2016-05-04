@@ -61,6 +61,21 @@ class NetWorkTools: AFHTTPSessionManager {
     }()
     
 
+    //加载微博数据
+    func loadStatus(finished: YHNetWorkFinishedCallBack) {
+        
+        if UserAccount.loadAccount()?.access_token == nil {
+            let error = YHNetWorkError.emptyTokenError.error()
+            print(error)
+            finished(result: nil, error: error)
+            return
+        }
+        let urlString = "2/statuses/home_timeline.json"
+        let params: [String: AnyObject] = ["access_token": UserAccount.loadAccount()!.access_token!]
+        
+        requestNetWork(.GET, urlString: urlString, params: params, finished: finished)
+        
+    }
     
     //返回OAuth授权
     func oauthUrl() -> NSURL {
