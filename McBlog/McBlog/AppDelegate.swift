@@ -17,13 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(switchRootViewController), name: YHRootViewControllerSwitchNotification, object: nil)
+        
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.backgroundColor = UIColor.whiteColor()
-        window?.rootViewController = NewFeautureController()
+        window?.rootViewController = defaultViewController()
         window?.makeKeyAndVisible()
         
         setUpAppearance()
-        
+        isNewUpdate()
         
         
         return true
@@ -51,12 +53,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func switchRootViewController(notification: NSNotification) {
+        print("切换控制器")
+        window?.rootViewController = (notification.object as! Bool) ? MainViewController() : WelcomeViewController()
+    }
+    
+    private func defaultViewController() -> UIViewController {
+        if !UserAccount.userLogon {
+            return MainViewController()
+        }
+        return isNewUpdate() ? NewFeautureController() : WelcomeViewController()
+    }
+    
+    private func isNewUpdate() -> Bool {
+        
+        print(NSBundle.mainBundle().infoDictionary)
+        let currentVersion = Double(NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String)
+        let sandBoxVersion = NSUserDefaults.standardUserDefaults().doubleForKey("sandBoxVersionKey")
+        NSUserDefaults.standardUserDefaults().setDouble(currentVersion!, forKey: "sandBoxVersionKey")
+        
+        return currentVersion > sandBoxVersion
+    }
+    
     private func setUpAppearance() {
         UINavigationBar.appearance().tintColor = UIColor.orangeColor()
         UITabBar.appearance().tintColor = UIColor.orangeColor()
-        
     }
+    
 
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
 
 }
 

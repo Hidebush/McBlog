@@ -11,6 +11,28 @@ import AFNetworking
 //App Key：1849210861
 //App Secret：b3b1408d1ade4ca68af191693a3df127
 
+private enum YHNetWorkError: Int {
+    
+    case emptyDataError  = -1
+    case emptyTokenError = -2
+    
+    private var errorDescrption: String {
+        switch self {
+        case .emptyDataError:
+            return "空数据"
+        case .emptyTokenError:
+            return "Token为nil"
+        }
+    }
+    
+    private func error() -> NSError {
+        
+        let error = NSError(domain: YHErrorDominName, code: rawValue, userInfo: [YHErrorDominName: errorDescrption])
+        return error
+    }
+    
+}
+
 public enum YHNetWorkRequstMethod : Int {
     
     case GET
@@ -69,6 +91,9 @@ class NetWorkTools: AFHTTPSessionManager {
     func loadUserInfo(uid: String, finished: YHNetWorkFinishedCallBack) {
         let urlString = "2/users/show.json"
         if UserAccount.loadAccount()?.access_token == nil {
+            let error = YHNetWorkError.emptyTokenError.error()
+            print(error)
+            finished(result: nil, error: error)
             return
         }
         
@@ -79,79 +104,45 @@ class NetWorkTools: AFHTTPSessionManager {
     }
     
     
-    
-    
-    
-    
     private func requestNetWork(requestMethod: YHNetWorkRequstMethod, urlString: String, params: [String: AnyObject]?, finished:YHNetWorkFinishedCallBack) {
+
+        let successCallBack: (NSURLSessionDataTask!, AnyObject?) -> Void = {(_, data) in
+            
+            if let jsonData = data as? [String: AnyObject] {
+                finished(result: jsonData, error: nil)
+            } else {
+
+                let error = YHNetWorkError.emptyDataError.error()
+                print(error)
+                finished(result: nil, error: error)
+            }
+            
+        }
+        
+        
+        let failureCallBack: (NSURLSessionDataTask?, NSError) -> Void = {(_, error) in
+            print(error)
+            finished(result: nil, error: error)
+        }
+        
+        
         switch requestMethod {
         case .GET:
-            GET(urlString, parameters: params, progress: nil, success: { (_, data) in
-                if let jsonData = data as? [String: AnyObject] {
-                    finished(result: jsonData, error: nil)
-                } else {
-                    let error = NSError(domain: YHErrorDominName, code: -1, userInfo: ["errorMessage": "空数据"])
-                    print("空数据 --  \(requestMethod) --  \(urlString) --  \(error)")
-                    finished(result: nil, error: error)
-                }
-                
-                }, failure: { (_, error) in
-                    print(error)
-                    finished(result: nil, error: error)
-            })
+            GET(urlString, parameters: params, progress: nil, success: successCallBack, failure: failureCallBack)
             
         case .POST:
-            POST(urlString, parameters: params, progress: nil, success: { (_, data) in
-                if let jsonData = data as? [String: AnyObject] {
-                    finished(result: jsonData, error: nil)
-                } else {
-                    let error = NSError(domain: YHErrorDominName, code: -1, userInfo: ["errorMessage": "空数据"])
-                    print("空数据 --  \(requestMethod) --  \(urlString) --  \(error)")
-                    finished(result: nil, error: error)
-                }
-                
-                }, failure: { (_, error) in
-                    print(error)
-                    finished(result: nil, error: error)
-            })
+            POST(urlString, parameters: params, progress: nil, success: successCallBack, failure: failureCallBack)
             
         case .HEAD:
             HEAD(urlString, parameters: params, success: { (_) in
                 
-                }, failure: { (_, error) in
-                    print(error)
-                    finished(result: nil, error: error)
-            })
+                }, failure: failureCallBack)
             
         case .PUT:
-            PUT(urlString, parameters: params, success: { (_, data) in
-                if let jsonData = data as? [String: AnyObject] {
-                    finished(result: jsonData, error: nil)
-                } else {
-                    let error = NSError(domain: YHErrorDominName, code: -1, userInfo: ["errorMessage": "空数据"])
-                    print("空数据 --  \(requestMethod) --  \(urlString) --  \(error)")
-                    finished(result: nil, error: error)
-                }
-                
-                }, failure: { (_, error) in
-                    print(error)
-                    finished(result: nil, error: error)
-            })
+            PUT(urlString, parameters: params, success: successCallBack, failure: failureCallBack)
             
         case .DELETE:
-            DELETE(urlString, parameters: params, success: { (_, data) in
-                if let jsonData = data as? [String: AnyObject] {
-                    finished(result: jsonData, error: nil)
-                } else {
-                    let error = NSError(domain: YHErrorDominName, code: -1, userInfo: ["errorMessage": "空数据"])
-                    print("空数据 --  \(requestMethod) --  \(urlString) --  \(error)")
-                    finished(result: nil, error: error)
-                }
-                
-                }, failure: { (_, error) in
-                    print(error)
-                    finished(result: nil, error: error)
-            })
+            DELETE(urlString, parameters: params, success: successCallBack, failure: failureCallBack)
 
         }
     }

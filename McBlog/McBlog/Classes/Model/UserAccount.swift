@@ -9,6 +9,11 @@
 import UIKit
 
 class UserAccount: NSObject, NSCoding {
+    
+    class var userLogon: Bool {
+        return loadAccount() != nil
+    }
+    
     var access_token: String?
     //过期时间
     var expireDate: NSDate?

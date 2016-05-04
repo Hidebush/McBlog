@@ -90,6 +90,9 @@ class OAuthViewController: UIViewController, UIWebViewDelegate{
                         if error != nil {
                             print(error)
                             self.closeVC("加载用户信息失败~")
+                        } else {
+                            NSNotificationCenter.defaultCenter().postNotificationName(YHRootViewControllerSwitchNotification, object: false)
+                            self.closeAction()
                         }
                     })
                 }
@@ -110,7 +113,7 @@ class OAuthViewController: UIViewController, UIWebViewDelegate{
     }
     
     deinit {
-        print("销毁")
+        print(#function)
     }
     
     override func didReceiveMemoryWarning() {

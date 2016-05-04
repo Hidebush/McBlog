@@ -8,14 +8,15 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "NewFeatureCell"
 
 class NewFeautureController: UICollectionViewController {
 
-    private let layout = UICollectionViewFlowLayout()
+    private let imageCount = 4
+    private let yhLayout = YHFlowLayout()
     
     init() {
-        super.init(collectionViewLayout: layout)
+        super.init(collectionViewLayout: yhLayout)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,7 +31,8 @@ class NewFeautureController: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.registerClass(NewFeatureCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+
 
         // Do any additional setup after loading the view.
     }
@@ -40,66 +42,102 @@ class NewFeautureController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        
+        return 1
     }
 
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        
+        return 4
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! NewFeatureCell
     
-        // Configure the cell
-    
+        cell.index = indexPath.item
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
-
 }
+
+
+class NewFeatureCell: UICollectionViewCell {
+    
+    var index: Int = 0 {
+        didSet {
+            imageView.image = UIImage(named: "new_feature_\(index + 1)")
+            button.hidden = !(index == 3)
+            (index == 3) ? buttonAnim() : ()
+        }
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        prepareUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        prepareUI()
+    }
+    
+    private func prepareUI() {
+        contentView.addSubview(imageView)
+        contentView.addSubview(button)
+        imageView.snp_makeConstraints { (make) in
+            make.edges.equalTo(contentView)
+        }
+        
+        button.snp_makeConstraints { (make) in
+            make.centerX.equalTo(contentView.snp_centerX)
+            make.bottom.equalTo(contentView.snp_bottom).offset(-100)
+        }
+    }
+    
+    private func buttonAnim() {
+        button.userInteractionEnabled = false
+        button.transform = CGAffineTransformMakeScale(0, 0)
+        UIView.animateWithDuration(1.2, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 10, options: UIViewAnimationOptions(rawValue: 0), animations: {
+            self.button.transform = CGAffineTransformIdentity
+            }) { (_) in
+                self.button.userInteractionEnabled = true
+        }
+    }
+    
+    @objc func startButtonClick() {
+        print("start")
+        NSNotificationCenter.defaultCenter().postNotificationName(YHRootViewControllerSwitchNotification, object: true)
+    }
+    
+    private lazy var imageView = UIImageView()
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .Custom)
+        
+        button.setBackgroundImage(UIImage(named: "new_feature_finish_button"), forState: UIControlState.Normal)
+        button.setBackgroundImage(UIImage(named: "new_feature_finish_button_highlighted"), forState: UIControlState.Highlighted)
+        button.setTitle("开始体验", forState: UIControlState.Normal)
+        button.sizeToFit()
+        button.addTarget(self, action: #selector(startButtonClick), forControlEvents: UIControlEvents.TouchUpInside)
+        return button
+    }()
+}
+
+private class YHFlowLayout: UICollectionViewFlowLayout {
+    private override func prepareLayout() {
+        itemSize = collectionView!.bounds.size
+        scrollDirection = .Horizontal
+        minimumLineSpacing = 0
+        collectionView?.pagingEnabled = true
+        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.bounces = false
+    }
+}
+
+
+
+
+

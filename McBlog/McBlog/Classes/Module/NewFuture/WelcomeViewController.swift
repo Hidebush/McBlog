@@ -52,12 +52,15 @@ class WelcomeViewController: UIViewController {
     
     private func iconViewAnimation() {
         
-        UIView.animateWithDuration(1.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: {
-                self.iconViewBottomCons?.updateOffset(160 - UIScreen.mainScreen().bounds.size.height)
-                self.view.layoutIfNeeded()
-            }, completion: nil)
+        UIView.animateWithDuration(1.2, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: UIViewAnimationOptions.CurveEaseInOut, animations: { 
+            self.iconViewBottomCons?.updateOffset(160 - UIScreen.mainScreen().bounds.size.height)
+            self.view.layoutIfNeeded()
+            }) { (_) in
+                NSNotificationCenter.defaultCenter().postNotificationName(YHRootViewControllerSwitchNotification, object: true)
+        }
+
     }
-    
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
