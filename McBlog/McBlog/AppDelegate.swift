@@ -67,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func isNewUpdate() -> Bool {
         
-        print(NSBundle.mainBundle().infoDictionary)
         let currentVersion = Double(NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String)
         let sandBoxVersion = NSUserDefaults.standardUserDefaults().doubleForKey("sandBoxVersionKey")
         NSUserDefaults.standardUserDefaults().setDouble(currentVersion!, forKey: "sandBoxVersionKey")

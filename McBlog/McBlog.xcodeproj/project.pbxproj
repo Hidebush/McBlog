@@ -14,6 +14,14 @@
 		846C9B021CD346E100B8EF04 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C9B011CD346E100B8EF04 /* WelcomeViewController.swift */; };
 		84DC9D891CD37217002FA4E4 /* NewFeautureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC9D881CD37217002FA4E4 /* NewFeautureController.swift */; };
 		84DE4D4A1CD8A6F10026BC42 /* McBlogDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D491CD8A6F10026BC42 /* McBlogDefine.swift */; };
+		84DE4D6F1CDB2FB00026BC42 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D6E1CDB2FB00026BC42 /* Status.swift */; };
+		84DE4D711CDB3D1C0026BC42 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D701CDB3D1C0026BC42 /* User.swift */; };
+		84DE4D741CDB408D0026BC42 /* StatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D731CDB408D0026BC42 /* StatusCell.swift */; };
+		84DE4D761CDB41AC0026BC42 /* StatusTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D751CDB41AC0026BC42 /* StatusTopView.swift */; };
+		84DE4D781CDB44B80026BC42 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D771CDB44B80026BC42 /* UILabel+Extension.swift */; };
+		84DE4D7A1CDB4FA10026BC42 /* StatusBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D791CDB4FA10026BC42 /* StatusBottomView.swift */; };
+		84DE4D7C1CDB50E80026BC42 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D7B1CDB50E80026BC42 /* UIButton+Extension.swift */; };
+		84DE4D7E1CDB5BD20026BC42 /* StatusPictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D7D1CDB5BD20026BC42 /* StatusPictureView.swift */; };
 		862B196A7D5AA23EBC094947 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975252E2E3AE481582DB485 /* Pods.framework */; };
 		AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB11CBFF009000954D8 /* AppDelegate.swift */; };
 		AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB31CBFF009000954D8 /* ViewController.swift */; };
@@ -54,6 +62,14 @@
 		846C9B011CD346E100B8EF04 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		84DC9D881CD37217002FA4E4 /* NewFeautureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeautureController.swift; sourceTree = "<group>"; };
 		84DE4D491CD8A6F10026BC42 /* McBlogDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = McBlogDefine.swift; sourceTree = "<group>"; };
+		84DE4D6E1CDB2FB00026BC42 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		84DE4D701CDB3D1C0026BC42 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		84DE4D731CDB408D0026BC42 /* StatusCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusCell.swift; sourceTree = "<group>"; };
+		84DE4D751CDB41AC0026BC42 /* StatusTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusTopView.swift; sourceTree = "<group>"; };
+		84DE4D771CDB44B80026BC42 /* UILabel+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		84DE4D791CDB4FA10026BC42 /* StatusBottomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBottomView.swift; sourceTree = "<group>"; };
+		84DE4D7B1CDB50E80026BC42 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		84DE4D7D1CDB5BD20026BC42 /* StatusPictureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusPictureView.swift; sourceTree = "<group>"; };
 		8FE2AFDE660910EE48D767AE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AA777CAE1CBFF009000954D8 /* McBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = McBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA777CB11CBFF009000954D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +129,8 @@
 			isa = PBXGroup;
 			children = (
 				846C9A961CD1F75500B8EF04 /* UserAccount.swift */,
+				84DE4D6E1CDB2FB00026BC42 /* Status.swift */,
+				84DE4D701CDB3D1C0026BC42 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -122,6 +140,8 @@
 			children = (
 				846C9A911CCF7FCB00B8EF04 /* NetWorkTools.swift */,
 				84DE4D491CD8A6F10026BC42 /* McBlogDefine.swift */,
+				84DE4D771CDB44B80026BC42 /* UILabel+Extension.swift */,
+				84DE4D7B1CDB50E80026BC42 /* UIButton+Extension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -141,6 +161,17 @@
 				84DC9D881CD37217002FA4E4 /* NewFeautureController.swift */,
 			);
 			path = NewFuture;
+			sourceTree = "<group>";
+		};
+		84DE4D721CDB40610026BC42 /* StatusCell */ = {
+			isa = PBXGroup;
+			children = (
+				84DE4D731CDB408D0026BC42 /* StatusCell.swift */,
+				84DE4D751CDB41AC0026BC42 /* StatusTopView.swift */,
+				84DE4D791CDB4FA10026BC42 /* StatusBottomView.swift */,
+				84DE4D7D1CDB5BD20026BC42 /* StatusPictureView.swift */,
+			);
+			path = StatusCell;
 			sourceTree = "<group>";
 		};
 		8FD2995CCF2F230B8832F175 /* Pods */ = {
@@ -239,6 +270,7 @@
 		AAE58E411CBFFA3900FBB54D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				84DE4D721CDB40610026BC42 /* StatusCell */,
 				AAE58E4A1CBFFB9B00FBB54D /* HomeTableViewController.swift */,
 			);
 			path = Home;
@@ -470,18 +502,26 @@
 				846C9A921CCF7FCB00B8EF04 /* NetWorkTools.swift in Sources */,
 				84DC9D891CD37217002FA4E4 /* NewFeautureController.swift in Sources */,
 				AAE58E511CBFFBDB00FBB54D /* ProfileTableViewController.swift in Sources */,
+				84DE4D7C1CDB50E80026BC42 /* UIButton+Extension.swift in Sources */,
 				AAE58E4B1CBFFB9B00FBB54D /* HomeTableViewController.swift in Sources */,
 				84DE4D4A1CD8A6F10026BC42 /* McBlogDefine.swift in Sources */,
+				84DE4D741CDB408D0026BC42 /* StatusCell.swift in Sources */,
 				AAE58E581CC0B60100FBB54D /* BaseTableViewController.swift in Sources */,
 				AAE58E491CBFFB7D00FBB54D /* MainViewController.swift in Sources */,
+				84DE4D711CDB3D1C0026BC42 /* User.swift in Sources */,
 				AAE58E4D1CBFFBA900FBB54D /* MessageTableViewController.swift in Sources */,
 				846C9B021CD346E100B8EF04 /* WelcomeViewController.swift in Sources */,
 				AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */,
+				84DE4D781CDB44B80026BC42 /* UILabel+Extension.swift in Sources */,
 				AAE58E4F1CBFFBCC00FBB54D /* DiscoverTableViewController.swift in Sources */,
+				84DE4D6F1CDB2FB00026BC42 /* Status.swift in Sources */,
 				846C9A971CD1F75500B8EF04 /* UserAccount.swift in Sources */,
 				845193AA1CC0C1BF0084436E /* VistorLoginView.swift in Sources */,
+				84DE4D761CDB41AC0026BC42 /* StatusTopView.swift in Sources */,
 				846C9A951CD1AE3600B8EF04 /* OAuthViewController.swift in Sources */,
+				84DE4D7E1CDB5BD20026BC42 /* StatusPictureView.swift in Sources */,
 				AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */,
+				84DE4D7A1CDB4FA10026BC42 /* StatusBottomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,8 +644,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = McBlog/Info.plist;
@@ -624,8 +664,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 475993847@qq.com (NVS6T5UB84)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = McBlog/Info.plist;
