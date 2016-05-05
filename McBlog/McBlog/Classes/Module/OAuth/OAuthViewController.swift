@@ -63,8 +63,6 @@ class OAuthViewController: UIViewController, UIWebViewDelegate{
             let code = (query as NSString).substringFromIndex("code=".length)
             print(request)
             print(code)
-            
-            // TODO: 换区Token
             loadAccessToken(code)
             
             

@@ -60,21 +60,27 @@ class NetWorkTools: AFHTTPSessionManager {
         return tools
     }()
     
-
-    //加载微博数据
-    func loadStatus(finished: YHNetWorkFinishedCallBack) {
-        
+    /*
+     检查Token
+     */
+    private func tokenDict(finished: YHNetWorkFinishedCallBack) -> [String: AnyObject]? {
         if UserAccount.loadAccount()?.access_token == nil {
             let error = YHNetWorkError.emptyTokenError.error()
             print(error)
             finished(result: nil, error: error)
+        }
+        
+        return ["access_token": UserAccount.loadAccount()!.access_token!]
+    }
+    
+    //加载微博数据
+    func loadStatus(finished: YHNetWorkFinishedCallBack) {
+        
+        guard let params = tokenDict(finished) else {
             return
         }
         let urlString = "2/statuses/home_timeline.json"
-        let params: [String: AnyObject] = ["access_token": UserAccount.loadAccount()!.access_token!]
-        
         requestNetWork(.GET, urlString: urlString, params: params, finished: finished)
-        
     }
     
     //返回OAuth授权
@@ -104,16 +110,12 @@ class NetWorkTools: AFHTTPSessionManager {
     }
     
     func loadUserInfo(uid: String, finished: YHNetWorkFinishedCallBack) {
-        let urlString = "2/users/show.json"
-        if UserAccount.loadAccount()?.access_token == nil {
-            let error = YHNetWorkError.emptyTokenError.error()
-            print(error)
-            finished(result: nil, error: error)
+        
+        guard var params = tokenDict(finished) else {
             return
         }
-        
-        let params = ["access_token": UserAccount.loadAccount()!.access_token!, "uid": uid] as [String: AnyObject]
-        
+        let urlString = "2/users/show.json"
+        params["uid"] = uid
         requestNetWork(.GET, urlString: urlString, params: params, finished: finished)
         
     }
