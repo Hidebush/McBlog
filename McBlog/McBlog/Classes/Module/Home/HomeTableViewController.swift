@@ -8,9 +8,17 @@
 
 import UIKit
 
+private enum StatusCellIdentifier: String {
+    case NormalReuseId = "NormalReuseId"
+    case ForwardReuseId = "ForwardReuseId"
+    
+    static func cellId(status: Status) -> String {
+        return status.retweeted_status == nil ? StatusCellIdentifier.NormalReuseId.rawValue : StatusCellIdentifier.ForwardReuseId.rawValue
+    }
+}
+
 class HomeTableViewController: BaseTableViewController {
 
-    let reuseId = "statusCellId"
     /// 微博数据数组
     private var statuses: [Status]? {
         didSet {
@@ -24,14 +32,16 @@ class HomeTableViewController: BaseTableViewController {
             visitorView?.setUpVisitView(true, imageName: "visitordiscover_feed_image_smallicon", message: "关注一些人，回这里看看有什么惊喜")
             return ;
         }
+        refreshControl = YHRefreshConrol()
         prepareTableView()
         loadStatus()
     }
     
     private func prepareTableView() {
-        tableView.registerClass(StatusCell.self, forCellReuseIdentifier: reuseId)
+        tableView.registerClass(StatusNormalCell.self, forCellReuseIdentifier: StatusCellIdentifier.NormalReuseId.rawValue)
+        tableView.registerClass(StatusForwardCell.self, forCellReuseIdentifier: StatusCellIdentifier.ForwardReuseId.rawValue)
         tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-//        tableView.estimatedRowHeight = 200
+//        tableView.estimatedRowHeight = 300
 //        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
@@ -63,19 +73,21 @@ class HomeTableViewController: BaseTableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseId, forIndexPath: indexPath) as! StatusCell
-        cell.status = statuses![indexPath.row]
-
+        let status = statuses![indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(StatusCellIdentifier.cellId(status), forIndexPath: indexPath) as! StatusCell
+        cell.status = status
         return cell
-    }
-
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseId) as! StatusCell
-        return cell.rowHeight(statuses![indexPath.row])
+        let status = statuses![indexPath.row]
+        if let h = status.rowHeight {
+            return h
+        }
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier(StatusCellIdentifier.cellId(status)) as! StatusCell
+        status.rowHeight = cell.rowHeight(status)
+        return status.rowHeight!
     }
 
 }

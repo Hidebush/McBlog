@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class StatusPictureView: UICollectionView {
 
@@ -35,7 +36,15 @@ class StatusPictureView: UICollectionView {
         }
         
         if count == 1 {
-            let size = CGSizeMake(150, 150)
+            
+            let key = status?.picURLs![0].absoluteString
+            var size = CGSizeMake(150, 120)
+            if let image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(key) {
+                size = image.size
+                size.width = size.width < 40 ? 40 : size.width
+                size.width = size.width > UIScreen.mainScreen().bounds.size.width ? 150 : size.width
+            }
+            
             pictureLayout.itemSize = size
             return size
         }
@@ -54,7 +63,7 @@ class StatusPictureView: UICollectionView {
     private var pictureLayout = UICollectionViewFlowLayout()
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: pictureLayout)
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.clearColor()
         self.dataSource = self
         registerClass(PictureViewCell.self, forCellWithReuseIdentifier: pictureViewCellId)
     }
@@ -67,7 +76,7 @@ class StatusPictureView: UICollectionView {
 
 extension StatusPictureView: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return status?.pic_urls?.count ?? 0
+        return status?.picURLs?.count ?? 0
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -95,13 +104,18 @@ class PictureViewCell: UICollectionViewCell {
     }
     
     private func setUpUI() {
-        addSubview(pictureImageView)
+        contentView.addSubview(pictureImageView)
         pictureImageView.snp_makeConstraints { (make) in
             make.edges.equalTo(contentView)
         }
     }
     
-    private lazy var pictureImageView: UIImageView = UIImageView()
+    private lazy var pictureImageView: UIImageView = {
+       let imageView = UIImageView()
+        imageView.contentMode = UIViewContentMode.ScaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
 }
 
 

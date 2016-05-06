@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-private let statusCellMarginEight = 8
+let statusCellMarginEight: CGFloat = 8
 private let statusCellMarginTen = 10
 private let topViewHeight = 43
 private let bottomViewHeight = 44
@@ -20,13 +20,6 @@ class StatusCell: UITableViewCell {
             topView.status = status
             contentLabel.text = status?.text
             pictureView.status = status
-        
-            pictureView.snp_remakeConstraints { (make) in
-                make.top.equalTo(contentLabel.snp_bottom).offset(statusCellMarginEight)
-                make.left.equalTo(contentLabel)
-                make.width.equalTo(pictureView.bounds.size.width)
-                make.height.equalTo(pictureView.bounds.size.height)
-            }
         }
     }
 
@@ -53,7 +46,7 @@ class StatusCell: UITableViewCell {
         return height
     }
     
-    private func setUpUI() {
+    func setUpUI() {
         let sepView = UIView()
         sepView.backgroundColor = UIColor(white: 0.8, alpha: 1.0)
         contentView.addSubview(sepView)
@@ -79,12 +72,12 @@ class StatusCell: UITableViewCell {
             make.right.equalTo(topView.snp_right).offset(-statusCellMarginEight)
         }
         
-        pictureView.snp_makeConstraints { (make) in
-            make.top.equalTo(contentLabel.snp_bottom).offset(statusCellMarginEight)
-            make.left.equalTo(contentLabel)
-            make.width.equalTo(contentLabel.snp_width)
-            make.height.equalTo(290)
-        }
+//        pictureView.snp_makeConstraints { (make) in
+//            make.top.equalTo(contentLabel.snp_bottom).offset(statusCellMarginEight)
+//            make.left.equalTo(contentLabel)
+//            make.width.equalTo(contentLabel.snp_width)
+//            make.height.equalTo(290)
+//        }
         
         bottomView.snp_makeConstraints { (make) in
             make.top.equalTo(pictureView.snp_bottom).offset(statusCellMarginEight)
@@ -96,14 +89,14 @@ class StatusCell: UITableViewCell {
     
     
     private lazy var topView: StatusTopView = StatusTopView()
-    private lazy var contentLabel: UILabel = {
+    lazy var contentLabel: UILabel = {
        let contentLabel = UILabel(color: UIColor.darkGrayColor(), fontSize: 15)
         contentLabel.numberOfLines = 0
         contentLabel.preferredMaxLayoutWidth = UIScreen.mainScreen().bounds.size.width - 2.0 * CGFloat(statusCellMarginEight)
         return contentLabel
     }()
-    private lazy var pictureView: StatusPictureView = StatusPictureView()
-    private lazy var bottomView: StatusBottomView = StatusBottomView()
+    lazy var pictureView: StatusPictureView = StatusPictureView()
+    lazy var bottomView: StatusBottomView = StatusBottomView()
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
