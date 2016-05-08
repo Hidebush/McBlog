@@ -80,9 +80,10 @@ class Status: NSObject {
             for url in urls {
                 dispatch_group_enter(group)
                 SDWebImageDownloader.sharedDownloader().downloadImageWithURL(url, options: SDWebImageDownloaderOptions(rawValue: 0), progress: nil, completed: { (image, _, _, _) in
-                    
-                    let data = UIImagePNGRepresentation(image)!
-                    dataLength += data.length
+                    if image != nil {
+                        let data = UIImagePNGRepresentation(image)!
+                        dataLength += data.length
+                    }
                     print(image)
                     dispatch_group_leave(group)
                 })

@@ -39,6 +39,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="rotateIcon" destination="df2-2z-Ck7" id="z0k-GQ-QNr"/>
+            </connections>
             <point key="canvasLocation" x="349" y="151.5"/>
         </view>
     </objects>

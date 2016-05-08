@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let 
+private let refreshViewOffset: CGFloat = -60
 class YHRefreshConrol: UIRefreshControl {
     override init() {
         super.init()
@@ -17,7 +17,13 @@ class YHRefreshConrol: UIRefreshControl {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        print(change)
+        if frame.origin.y < refreshViewOffset && !refreshView.rotateFlag {
+            refreshView.rotateFlag = true
+            print("反转")
+        } else if frame.origin.y > refreshViewOffset && refreshView.rotateFlag {
+            refreshView.rotateFlag = false
+            print("下拉")
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +37,7 @@ class YHRefreshConrol: UIRefreshControl {
     private func setUpUI() {
         tintColor = UIColor.clearColor() 
         addSubview(refreshView)
-        refreshView.frame = CGRectMake((UIScreen.mainScreen().bounds.size.width - 160.0) * 0.5, 0, 160, 60)
+        refreshView.frame = CGRectMake((UIScreen.mainScreen().bounds.size.width - 160.0) * 0.5-15, 0, 160, 60)
     }
     
     
@@ -39,7 +45,22 @@ class YHRefreshConrol: UIRefreshControl {
 }
 
 class YHRefreshView: UIView {
+    
+    private var rotateFlag: Bool = false {
+        didSet {
+            rotateIconAnim()
+        }
+    }
+    @IBOutlet weak var rotateIcon: UIImageView!
+    
     class func refreshView() -> YHRefreshView {
         return NSBundle.mainBundle().loadNibNamed("YHRefreshView", owner: nil, options: nil).last as! YHRefreshView
+    }
+    
+    private func rotateIconAnim() {
+        let angel = rotateFlag ? CGFloat(M_PI - 0.01) : CGFloat(M_PI + 0.01)
+        UIView.animateWithDuration(1.0) { 
+            self.rotateIcon.transform = CGAffineTransformRotate(self.rotateIcon.transform, angel)
+        }
     }
 }
