@@ -47,8 +47,8 @@ class Status: NSObject {
     /// 转发微博
     var retweeted_status: Status?
     
-    class func loadStatus(finished: (datalist: [Status]?, error: NSError?) -> ()){
-        NetWorkTools.shareTools.loadStatus { (result, error) in
+    class func loadStatus(since_id: Int, max_id: Int, finished: (datalist: [Status]?, error: NSError?) -> ()){
+        NetWorkTools.shareTools.loadStatus(since_id, max_id: max_id) { (result, error) in
             if error != nil {
                 finished(datalist: nil, error: error)
                 return
@@ -83,8 +83,8 @@ class Status: NSObject {
                     if image != nil {
                         let data = UIImagePNGRepresentation(image)!
                         dataLength += data.length
+                        print(image)
                     }
-                    print(image)
                     dispatch_group_leave(group)
                 })
             }

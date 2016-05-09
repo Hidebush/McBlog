@@ -33,6 +33,7 @@ class HomeTableViewController: BaseTableViewController {
             return ;
         }
         refreshControl = YHRefreshConrol()
+        refreshControl?.addTarget(self, action: #selector(loadStatus), forControlEvents: UIControlEvents.ValueChanged)
         prepareTableView()
         loadStatus()
     }
@@ -45,15 +46,55 @@ class HomeTableViewController: BaseTableViewController {
 //        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    private func loadStatus() {
-        Status.loadStatus {[weak self] (datalist, error) in
+    private var pullUpRefresh = false
+    @objc private func loadStatus() {
+        refreshControl?.beginRefreshing()
+        
+        var since_id = statuses?.first?.id ?? 0
+        var max_id = 0
+        if pullUpRefresh {
+            since_id = 0
+            max_id = statuses!.last!.id - 1 ?? 0
+        }
+        
+        
+        Status.loadStatus(since_id, max_id: max_id) {(datalist, error) in
+            self.refreshControl?.endRefreshing()
             if error != nil {
                 print(error)
                 return
             }
-            self?.statuses = datalist
+            
+            let count = datalist?.count
+            print("刷新到 \(count)条新数据")
+            if (since_id > 0) {
+                self.showPullTipAction(Int(count!))
+            }
+            if count == 0 {
+                return
+            }
+            if since_id > 0 {
+                self.statuses! = datalist! + self.statuses!
+            } else if (max_id > 0) {
+                self.statuses! += datalist!
+                self.pullUpRefresh = false
+            } else {
+                self.statuses = datalist
+            }
             print(datalist)
         }
+    }
+    
+    private func showPullTipAction(count: Int) {
+        let originY: CGFloat = 44
+        tipLabel.text = count == 0 ? "暂时没有新的微博":"刷新到 \(count)条新数据"
+        UIView.animateWithDuration(1.2, animations: {
+            UIView.setAnimationRepeatAutoreverses(true)
+            self.tipLabel.transform = CGAffineTransformMakeTranslation(0, 3 * originY)
+            }) { (_) in
+                self.tipLabel.transform = CGAffineTransformIdentity
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,6 +116,11 @@ class HomeTableViewController: BaseTableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let status = statuses![indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier(StatusCellIdentifier.cellId(status), forIndexPath: indexPath) as! StatusCell
+        
+        if indexPath.row == statuses!.count - 1 {
+            pullUpRefresh = true
+            loadStatus()
+        }
         cell.status = status
         return cell
     }
@@ -89,5 +135,16 @@ class HomeTableViewController: BaseTableViewController {
         status.rowHeight = cell.rowHeight(status)
         return status.rowHeight!
     }
+    
+    
+    private lazy var tipLabel: UILabel = {
+        let originY: CGFloat = 44
+        let label = UILabel(color: UIColor.whiteColor(), fontSize: 15)
+        label.backgroundColor = UIColor.orangeColor()
+        label.frame = CGRectMake(0, -2*originY, UIScreen.mainScreen().bounds.size.width, originY)
+        label.textAlignment = NSTextAlignment.Center
+        self.navigationController?.navigationBar.insertSubview(label, atIndex: 0)
+        return label
+    }()
 
 }

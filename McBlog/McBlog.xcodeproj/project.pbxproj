@@ -12,6 +12,8 @@
 		846C9A951CD1AE3600B8EF04 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C9A941CD1AE3600B8EF04 /* OAuthViewController.swift */; };
 		846C9A971CD1F75500B8EF04 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C9A961CD1F75500B8EF04 /* UserAccount.swift */; };
 		846C9B021CD346E100B8EF04 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846C9B011CD346E100B8EF04 /* WelcomeViewController.swift */; };
+		8476F1CD1CE07B62005375E6 /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476F1CC1CE07B61005375E6 /* ComposeViewController.swift */; };
+		8476F1CF1CE0A263005375E6 /* UIBarButtonItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8476F1CE1CE0A263005375E6 /* UIBarButtonItem+Extension.swift */; };
 		84DC9D891CD37217002FA4E4 /* NewFeautureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DC9D881CD37217002FA4E4 /* NewFeautureController.swift */; };
 		84DE4D4A1CD8A6F10026BC42 /* McBlogDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D491CD8A6F10026BC42 /* McBlogDefine.swift */; };
 		84DE4D6F1CDB2FB00026BC42 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D6E1CDB2FB00026BC42 /* Status.swift */; };
@@ -64,6 +66,8 @@
 		846C9A941CD1AE3600B8EF04 /* OAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthViewController.swift; sourceTree = "<group>"; };
 		846C9A961CD1F75500B8EF04 /* UserAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
 		846C9B011CD346E100B8EF04 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		8476F1CC1CE07B61005375E6 /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
+		8476F1CE1CE0A263005375E6 /* UIBarButtonItem+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extension.swift"; sourceTree = "<group>"; };
 		84DC9D881CD37217002FA4E4 /* NewFeautureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewFeautureController.swift; sourceTree = "<group>"; };
 		84DE4D491CD8A6F10026BC42 /* McBlogDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = McBlogDefine.swift; sourceTree = "<group>"; };
 		84DE4D6E1CDB2FB00026BC42 /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 				84DE4D491CD8A6F10026BC42 /* McBlogDefine.swift */,
 				84DE4D771CDB44B80026BC42 /* UILabel+Extension.swift */,
 				84DE4D7B1CDB50E80026BC42 /* UIButton+Extension.swift */,
+				8476F1CE1CE0A263005375E6 /* UIBarButtonItem+Extension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -169,6 +174,14 @@
 				84DC9D881CD37217002FA4E4 /* NewFeautureController.swift */,
 			);
 			path = NewFuture;
+			sourceTree = "<group>";
+		};
+		8476F1CB1CE07B46005375E6 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				8476F1CC1CE07B61005375E6 /* ComposeViewController.swift */,
+			);
+			path = Compose;
 			sourceTree = "<group>";
 		};
 		84DE4D721CDB40610026BC42 /* StatusCell */ = {
@@ -266,6 +279,7 @@
 		AAE58E3F1CBFFA3900FBB54D /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				8476F1CB1CE07B46005375E6 /* Compose */,
 				846C9B001CD346B400B8EF04 /* NewFuture */,
 				846C9A931CD1AE1400B8EF04 /* OAuth */,
 				AAE58E561CC0B5F700FBB54D /* Base */,
@@ -529,6 +543,7 @@
 				84DE4D741CDB408D0026BC42 /* StatusCell.swift in Sources */,
 				AAE58E581CC0B60100FBB54D /* BaseTableViewController.swift in Sources */,
 				AAE58E491CBFFB7D00FBB54D /* MainViewController.swift in Sources */,
+				8476F1CD1CE07B62005375E6 /* ComposeViewController.swift in Sources */,
 				84DE4D711CDB3D1C0026BC42 /* User.swift in Sources */,
 				84DE4D821CDC4B1B0026BC42 /* StatusNormalCell.swift in Sources */,
 				84DE4D851CDC8BE40026BC42 /* YHRefreshConrol.swift in Sources */,
@@ -543,6 +558,7 @@
 				84DE4D761CDB41AC0026BC42 /* StatusTopView.swift in Sources */,
 				84DE4D801CDC41650026BC42 /* StatusForwardCell.swift in Sources */,
 				846C9A951CD1AE3600B8EF04 /* OAuthViewController.swift in Sources */,
+				8476F1CF1CE0A263005375E6 /* UIBarButtonItem+Extension.swift in Sources */,
 				84DE4D7E1CDB5BD20026BC42 /* StatusPictureView.swift in Sources */,
 				AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */,
 				84DE4D7A1CDB4FA10026BC42 /* StatusBottomView.swift in Sources */,

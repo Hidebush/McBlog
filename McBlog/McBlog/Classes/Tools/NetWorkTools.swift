@@ -74,11 +74,18 @@ class NetWorkTools: AFHTTPSessionManager {
     }
     
     //加载微博数据
-    func loadStatus(finished: YHNetWorkFinishedCallBack) {
+    func loadStatus(since_id: Int, max_id: Int, finished: YHNetWorkFinishedCallBack) {
         
-        guard let params = tokenDict(finished) else {
+        guard var params = tokenDict(finished) else {
             return
         }
+        if since_id > 0 {
+            params["since_id"] = since_id
+        }
+        if max_id > 0 {
+            params["max_id"] = max_id
+        }
+        
         let urlString = "2/statuses/home_timeline.json"
         requestNetWork(.GET, urlString: urlString, params: params, finished: finished)
     }

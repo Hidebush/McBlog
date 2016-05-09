@@ -16,13 +16,25 @@ class YHRefreshConrol: UIRefreshControl {
         addObserver(self, forKeyPath: "frame", options: NSKeyValueObservingOptions(rawValue: 0), context: nil)
     }
     
+    override func endRefreshing() {
+        super.endRefreshing()
+        refreshView.stopLoading()
+    }
+    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if frame.origin.y > 0 {
+            return
+        }
+        
+        if refreshing {
+            refreshView.startLoading()
+        }
+        
         if frame.origin.y < refreshViewOffset && !refreshView.rotateFlag {
             refreshView.rotateFlag = true
-            print("反转")
         } else if frame.origin.y > refreshViewOffset && refreshView.rotateFlag {
             refreshView.rotateFlag = false
-            print("下拉")
         }
     }
     
@@ -52,6 +64,8 @@ class YHRefreshView: UIView {
         }
     }
     @IBOutlet weak var rotateIcon: UIImageView!
+    @IBOutlet weak var tipView: UIView!
+    @IBOutlet weak var loadingIcon: UIImageView!
     
     class func refreshView() -> YHRefreshView {
         return NSBundle.mainBundle().loadNibNamed("YHRefreshView", owner: nil, options: nil).last as! YHRefreshView
@@ -59,8 +73,27 @@ class YHRefreshView: UIView {
     
     private func rotateIconAnim() {
         let angel = rotateFlag ? CGFloat(M_PI - 0.01) : CGFloat(M_PI + 0.01)
-        UIView.animateWithDuration(1.0) { 
+        UIView.animateWithDuration(0.25) {
             self.rotateIcon.transform = CGAffineTransformRotate(self.rotateIcon.transform, angel)
         }
     }
+    
+    private func startLoading() {
+        tipView.hidden = true
+        if layer.animationForKey("loadingAnim") != nil {
+            return
+        }
+        let anim = CABasicAnimation(keyPath: "transform.rotation")
+        anim.toValue = 2*M_PI
+        anim.repeatCount = MAXFLOAT
+        anim.removedOnCompletion = false
+        anim.duration = 1
+        loadingIcon.layer.addAnimation(anim, forKey: "loadingAnim")
+    }
+    
+    private func stopLoading() {
+        tipView.hidden = false
+        loadingIcon.layer.removeAllAnimations()
+    }
+    
 }

@@ -48,6 +48,9 @@ class MainViewController: UITabBarController {
     
     func composeBtnClick() {
         print(#function)
+        let composeVc = UserAccount.userLogon ? ComposeViewController() : OAuthViewController()
+        let nav = UINavigationController(rootViewController: composeVc)
+        presentViewController(nav, animated: true, completion: nil)
     }
     
     
