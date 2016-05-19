@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ComposeViewController: UIViewController {
 
@@ -21,20 +22,52 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        addKeyboardObserver()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        textView.becomeFirstResponder()
     }
     
 
     @objc private func sendAction() {
         print("发送微博")
+        textView.resignFirstResponder()
     }
     
     @objc private func closeAction() {
+        textView.resignFirstResponder()
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     @objc private func inputEmoticon() {
-        print("111")
+        removeKeyboardObserver()
+        
+        textView.resignFirstResponder()
+        textView.inputView = (textView.inputView == nil) ? emoticonVc.view : nil
+        
+        addKeyboardObserver()
+        textView.becomeFirstResponder()
+    }
+    
+    private func removeKeyboardObserver() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    private func addKeyboardObserver() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardChange), name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    func keyboardChange(notification: NSNotification) {
+        print(notification)
+        let rect: CGRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue()
+        self.toolBarBottom?.updateOffset(rect.origin.y - kScreenHeight)
+        UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue) {
+            self.view.layoutIfNeeded()
+        }
+        
     }
     
     private func prepareTextView() {
@@ -43,14 +76,15 @@ class ComposeViewController: UIViewController {
             make.top.left.right.equalTo(view)
             make.bottom.equalTo(toolBar.snp_top)
         }
-        textView.backgroundColor = UIColor.redColor()
     }
     
+    private var toolBarBottom: Constraint? = nil
     private func prepareToolBar() {
         view.addSubview(toolBar)
         toolBar.snp_makeConstraints { (make) in
-            make.left.bottom.right.equalTo(view)
+            make.left.right.equalTo(view)
             make.height.equalTo(44)
+            toolBarBottom = make.bottom.equalTo(view).constraint
         }
         
         let itemSettings = [["imageName": "compose_toolbar_picture"],
@@ -94,7 +128,29 @@ class ComposeViewController: UIViewController {
         
     }
     
-    private lazy var textView: UITextView = UITextView()
+    private lazy var emoticonVc: EmoticonViewController = EmoticonViewController {[weak self] (emoticon) in
+        self?.textView.insertEmoticon(emoticon)
+        
+    }
+    
+    private lazy var textView: UITextView = {
+       let textView = UITextView()
+        textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        textView.alwaysBounceVertical = true
+        textView.font = UIFont.systemFontOfSize(17)
+        textView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
+        let placeHolderLb: UILabel = UILabel()
+        placeHolderLb.text = "分享新鲜事儿..."
+        placeHolderLb.textColor = UIColor.lightGrayColor()
+        placeHolderLb.font = UIFont.systemFontOfSize(17)
+        textView.addSubview(placeHolderLb)
+        placeHolderLb.snp_makeConstraints(closure: { (make) in
+            make.left.equalTo(5)
+            make.top.equalTo(8)
+        })
+        
+        return textView
+    }()
     
     private lazy var toolBar: UIToolbar = {
         let toolBar = UIToolbar()
@@ -102,6 +158,10 @@ class ComposeViewController: UIViewController {
         return toolBar
     }()
 
+    
+    deinit {
+        removeKeyboardObserver()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
