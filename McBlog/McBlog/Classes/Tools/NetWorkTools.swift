@@ -116,6 +116,22 @@ class NetWorkTools: AFHTTPSessionManager {
         
     }
     
+    func sendStatus(status: String, image: UIImage?, finished: YHNetWorkFinishedCallBack) {
+        guard var params = tokenDict(finished) else {
+            return
+        }
+        params["status"] = status
+        
+        if image == nil {
+            requestNetWork(.POST, urlString: "2/statuses/update.json", params: params) { (result, error) in
+                finished(result: result, error: error)
+            }
+        } else {
+            uploadImage("https://upload.api.weibo.com/2/statuses/upload.json", image: image!, params: params, finished: finished)
+        }
+        
+    }
+    
     func loadUserInfo(uid: String, finished: YHNetWorkFinishedCallBack) {
         
         guard var params = tokenDict(finished) else {
@@ -127,6 +143,43 @@ class NetWorkTools: AFHTTPSessionManager {
         
     }
     
+    /**
+     上传图像发表微博
+     
+     - parameter urlString: 上传接口
+     - parameter image:     图片
+     - parameter params:    参数
+     - parameter finished:  回调
+     */
+    
+    private func uploadImage(urlString: String, image: UIImage, params: [String: AnyObject], finished: YHNetWorkFinishedCallBack) {
+        
+        let successCallBack: (NSURLSessionDataTask!, AnyObject?) -> Void = {(_, data) in
+            
+            if let jsonData = data as? [String: AnyObject] {
+                finished(result: jsonData, error: nil)
+            } else {
+                
+                let error = YHNetWorkError.emptyDataError.error()
+                print(error)
+                finished(result: nil, error: error)
+            }
+            
+        }
+        
+        
+        let failureCallBack: (NSURLSessionDataTask?, NSError) -> Void = {(_, error) in
+            print(error)
+            finished(result: nil, error: error)
+        }
+        
+        POST(urlString, parameters: params, constructingBodyWithBlock: { (formData) in
+            
+            let imageData = UIImagePNGRepresentation(image)
+            formData.appendPartWithFileData(imageData!, name: "pic", fileName: "statusImage", mimeType: "application/octet-stream")
+            
+            }, progress: nil, success: successCallBack, failure: failureCallBack)
+    }
     
     private func requestNetWork(requestMethod: YHNetWorkRequstMethod, urlString: String, params: [String: AnyObject]?, finished:YHNetWorkFinishedCallBack) {
 

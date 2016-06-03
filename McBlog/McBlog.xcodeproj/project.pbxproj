@@ -33,6 +33,8 @@
 		84DE4D821CDC4B1B0026BC42 /* StatusNormalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D811CDC4B1B0026BC42 /* StatusNormalCell.swift */; };
 		84DE4D851CDC8BE40026BC42 /* YHRefreshConrol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DE4D841CDC8BE40026BC42 /* YHRefreshConrol.swift */; };
 		84DE4D871CDC8C3F0026BC42 /* YHRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84DE4D861CDC8C3F0026BC42 /* YHRefreshView.xib */; };
+		84E5B8EB1D00494B004837B1 /* YHImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5B8EA1D00494B004837B1 /* YHImagePickerController.swift */; };
+		84E5B8ED1D004964004837B1 /* UIImage+Extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E5B8EC1D004964004837B1 /* UIImage+Extension .swift */; };
 		862B196A7D5AA23EBC094947 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1975252E2E3AE481582DB485 /* Pods.framework */; };
 		AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB11CBFF009000954D8 /* AppDelegate.swift */; };
 		AA777CB41CBFF009000954D8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA777CB31CBFF009000954D8 /* ViewController.swift */; };
@@ -92,6 +94,8 @@
 		84DE4D811CDC4B1B0026BC42 /* StatusNormalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusNormalCell.swift; sourceTree = "<group>"; };
 		84DE4D841CDC8BE40026BC42 /* YHRefreshConrol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshConrol.swift; sourceTree = "<group>"; };
 		84DE4D861CDC8C3F0026BC42 /* YHRefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YHRefreshView.xib; sourceTree = "<group>"; };
+		84E5B8EA1D00494B004837B1 /* YHImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHImagePickerController.swift; sourceTree = "<group>"; };
+		84E5B8EC1D004964004837B1 /* UIImage+Extension .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension .swift"; sourceTree = "<group>"; };
 		8FE2AFDE660910EE48D767AE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AA777CAE1CBFF009000954D8 /* McBlog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = McBlog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA777CB11CBFF009000954D8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
@@ -160,12 +164,14 @@
 		846C9A901CCF7FB300B8EF04 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				84E5B8E91D00494B004837B1 /* YHImagePicker */,
 				84C2DC7B1CEDA94600208E3D /* Emoticon */,
 				846C9A911CCF7FCB00B8EF04 /* NetWorkTools.swift */,
 				84DE4D491CD8A6F10026BC42 /* McBlogDefine.swift */,
 				84DE4D771CDB44B80026BC42 /* UILabel+Extension.swift */,
 				84DE4D7B1CDB50E80026BC42 /* UIButton+Extension.swift */,
 				8476F1CE1CE0A263005375E6 /* UIBarButtonItem+Extension.swift */,
+				84E5B8EC1D004964004837B1 /* UIImage+Extension .swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -227,6 +233,14 @@
 				84DE4D861CDC8C3F0026BC42 /* YHRefreshView.xib */,
 			);
 			path = Refresh;
+			sourceTree = "<group>";
+		};
+		84E5B8E91D00494B004837B1 /* YHImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				84E5B8EA1D00494B004837B1 /* YHImagePickerController.swift */,
+			);
+			path = YHImagePicker;
 			sourceTree = "<group>";
 		};
 		8FD2995CCF2F230B8832F175 /* Pods */ = {
@@ -561,6 +575,7 @@
 				846C9A921CCF7FCB00B8EF04 /* NetWorkTools.swift in Sources */,
 				84DC9D891CD37217002FA4E4 /* NewFeautureController.swift in Sources */,
 				AAE58E511CBFFBDB00FBB54D /* ProfileTableViewController.swift in Sources */,
+				84E5B8EB1D00494B004837B1 /* YHImagePickerController.swift in Sources */,
 				84DE4D7C1CDB50E80026BC42 /* UIButton+Extension.swift in Sources */,
 				AAE58E4B1CBFFB9B00FBB54D /* HomeTableViewController.swift in Sources */,
 				84DE4D4A1CD8A6F10026BC42 /* McBlogDefine.swift in Sources */,
@@ -587,6 +602,7 @@
 				846C9A951CD1AE3600B8EF04 /* OAuthViewController.swift in Sources */,
 				84C2DC851CEDA94600208E3D /* UITextView+Emoticon.swift in Sources */,
 				8476F1CF1CE0A263005375E6 /* UIBarButtonItem+Extension.swift in Sources */,
+				84E5B8ED1D004964004837B1 /* UIImage+Extension .swift in Sources */,
 				84DE4D7E1CDB5BD20026BC42 /* StatusPictureView.swift in Sources */,
 				AA777CB21CBFF009000954D8 /* AppDelegate.swift in Sources */,
 				84DE4D7A1CDB4FA10026BC42 /* StatusBottomView.swift in Sources */,

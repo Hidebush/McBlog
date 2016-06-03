@@ -65,6 +65,7 @@ class StatusPictureView: UICollectionView {
         super.init(frame: frame, collectionViewLayout: pictureLayout)
         backgroundColor = UIColor.clearColor()
         self.dataSource = self
+        self.delegate = self
         registerClass(PictureViewCell.self, forCellWithReuseIdentifier: pictureViewCellId)
     }
     
@@ -74,7 +75,7 @@ class StatusPictureView: UICollectionView {
 
 }
 
-extension StatusPictureView: UICollectionViewDataSource {
+extension StatusPictureView: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return status?.picURLs?.count ?? 0
     }
@@ -84,6 +85,10 @@ extension StatusPictureView: UICollectionViewDataSource {
         pictureCell.picUrl = status!.picURLs![indexPath.item]
         return pictureCell
     }
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.item)
+    }
+    
 }
 
 class PictureViewCell: UICollectionViewCell {

@@ -19,4 +19,16 @@ extension UIButton {
         
     }
     
+    convenience init(imageNamed: String) {
+        self.init()
+        setUpImage(imageNamed)
+    }
+    
+    func setUpImage(imageNamed: String) {
+        setImage(UIImage(named: imageNamed), forState: UIControlState.Normal)
+        setImage(UIImage(named: imageNamed + "_highlighted"), forState: UIControlState.Highlighted)
+    }
+    
+    
+    
 }

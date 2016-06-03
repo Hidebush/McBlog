@@ -71,7 +71,7 @@ class EmoticonViewController: UIViewController {
         
     }
     
-    private lazy var packages = EmoticonPackage.packages()
+    private lazy var packages = EmoticonPackage.packages
     private lazy var toolBar = UIToolbar()
     private lazy var collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: YHFlowLayout())
     
@@ -118,6 +118,11 @@ extension EmoticonViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let emoticon = packages[indexPath.section].emoticons![indexPath.item]
         selectedEmoticonCallBack(emoticon: emoticon)
+        
+        if indexPath.section > 0 {
+            EmoticonPackage.addFavorite(emoticon)
+        }
+        
     }
     
 }

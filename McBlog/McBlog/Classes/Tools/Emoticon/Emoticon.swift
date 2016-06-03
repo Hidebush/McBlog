@@ -17,9 +17,9 @@ class EmoticonPackage: NSObject {
         self.id = id
         self.groupName = groupName
     }
+    static let packages = EmoticonPackage.loadPackages()
     
-    class func packages() -> [EmoticonPackage] {
-        
+    private class func loadPackages() -> [EmoticonPackage] {
         let path = (bundlePath as NSString).stringByAppendingPathComponent("emoticons.plist")
         let dict = NSDictionary(contentsOfFile: path)!
         let array = dict["packages"] as! [[String: AnyObject]]
@@ -34,7 +34,7 @@ class EmoticonPackage: NSObject {
         return arrayM
     }
     
-    func loadEmoticons() -> Self {
+    private func loadEmoticons() -> Self {
         let path = ((EmoticonPackage.bundlePath as NSString).stringByAppendingPathComponent(id) as NSString).stringByAppendingPathComponent("info.plist")
         let dict = NSDictionary(contentsOfFile: path)!
         groupName = dict["group_name_cn"] as? String
@@ -54,7 +54,39 @@ class EmoticonPackage: NSObject {
         return self
     }
     
-    func appendEmptyEmoction() -> Self {
+    
+    class func addFavorite(emoticon: Emoticon) {
+        
+        if emoticon.emoticonRemove == true {
+            return
+        }
+        
+        
+        var ems = packages[0].emoticons
+        ems?.removeLast()
+        
+        emoticon.times += 1
+        
+        let contains = packages[0].emoticons?.contains(emoticon)
+        if contains != true {
+            ems!.append(emoticon)
+        }
+        
+        ems = ems!.sort({ (e1, e2) -> Bool in
+            return e1.times > e2.times
+        })
+        
+        if contains != true {
+            ems!.removeLast()
+        }
+        
+        ems?.append(Emoticon(remove: true))
+        
+        packages[0].emoticons = ems
+        
+    }
+    
+    private func appendEmptyEmoction() -> Self {
         if emoticons == nil {
             emoticons = [Emoticon]()
         }
@@ -83,6 +115,8 @@ class Emoticon: NSObject {
     var id: String?
     var chs: String?
     var png: String?
+    
+    var times = 0 //表情点击次数
     
     var imagePath: String {
         if chs == nil {

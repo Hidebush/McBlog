@@ -11,6 +11,12 @@ import UIKit
 extension UITextView {
     
     func insertEmoticon(emoticon: Emoticon) {
+        
+        if (emoticon.emoticonRemove == true) {
+            deleteBackward()
+            return
+        }
+        
         if emoticon.emoji != nil {
             replaceRange(selectedTextRange!, withText: emoticon.emoji!)
             return
@@ -29,6 +35,7 @@ extension UITextView {
             let range = selectedRange
             attributedText = textViewAttText
             selectedRange = NSMakeRange(range.location + 1, 0)
+            delegate?.textViewDidChange!(self)
         }
         
         

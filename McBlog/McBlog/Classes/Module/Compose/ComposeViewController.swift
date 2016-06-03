@@ -8,15 +8,38 @@
 
 import UIKit
 import SnapKit
+import SVProgressHUD
 
-class ComposeViewController: UIViewController {
 
+private let kStatusTextMaxLength = 10
+class ComposeViewController: UIViewController, UITextViewDelegate {
+    
     override func loadView() {
         view = UIView()
         view.backgroundColor = UIColor.whiteColor()
+        
+        addChildViewController(pictureSelectorVC)
+        addSubViews()
         setUpNav()
         prepareToolBar()
         prepareTextView()
+        preparePhotoView()
+    }
+    
+    private func addSubViews() {
+        view.addSubview(textView)
+        view.addSubview(pictureSelectorVC.view)
+        view.addSubview(lengthTipLabel) // 添加在textView不显示  视图还没调整好
+        view.addSubview(toolBar)
+    }
+    
+    private func preparePhotoView() {
+        
+        pictureSelectorVC.view.snp_makeConstraints { (make) in
+            make.bottom.left.right.equalTo(view)
+            make.height.equalTo(kScreenHeight * 0.6)
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -35,6 +58,18 @@ class ComposeViewController: UIViewController {
     @objc private func sendAction() {
         print("发送微博")
         textView.resignFirstResponder()
+        
+        let image = pictureSelectorVC.photos.last
+        NetWorkTools.shareTools.sendStatus(textView.emoticonStr, image: image) { (result, error) in
+            SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.Gradient)
+            if error != nil {
+                print(error)
+                SVProgressHUD.showWithStatus("发送失败")
+            } else {
+                SVProgressHUD.showSuccessWithStatus("发送成功")
+            }
+            self.closeAction()
+        }
     }
     
     @objc private func closeAction() {
@@ -43,13 +78,21 @@ class ComposeViewController: UIViewController {
     }
     
     @objc private func inputEmoticon() {
-        removeKeyboardObserver()
+        /// 第一种 方法  先移除键盘通知  替换后 再监听
+//        removeKeyboardObserver()
+//        
+//        textView.resignFirstResponder()
+//        textView.inputView = (textView.inputView == nil) ? emoticonVc.view : nil
+//        
+//        addKeyboardObserver()
+//        textView.becomeFirstResponder()
+        
+        /// 第二种方法  通知中设置 动画
         
         textView.resignFirstResponder()
         textView.inputView = (textView.inputView == nil) ? emoticonVc.view : nil
-        
-        addKeyboardObserver()
         textView.becomeFirstResponder()
+        
     }
     
     private func removeKeyboardObserver() {
@@ -63,24 +106,36 @@ class ComposeViewController: UIViewController {
     func keyboardChange(notification: NSNotification) {
         print(notification)
         let rect: CGRect = notification.userInfo![UIKeyboardFrameEndUserInfoKey]!.CGRectValue()
+        let curve = notification.userInfo![UIKeyboardAnimationCurveUserInfoKey]!.integerValue
         self.toolBarBottom?.updateOffset(rect.origin.y - kScreenHeight)
         UIView.animateWithDuration(notification.userInfo![UIKeyboardAnimationDurationUserInfoKey]!.doubleValue) {
+            UIView.setAnimationCurve(UIViewAnimationCurve(rawValue: curve)!)
             self.view.layoutIfNeeded()
         }
         
     }
     
     private func prepareTextView() {
-        view.addSubview(textView)
+        lengthTipLabel.sizeToFit()
+        lengthTipLabel.backgroundColor = UIColor.cyanColor()
+        placeHolderLb.text = "分享新鲜事儿..."
+        textView.addSubview(placeHolderLb)
+        placeHolderLb.snp_makeConstraints(closure: { (make) in
+            make.left.equalTo(5)
+            make.top.equalTo(8)
+        })
         textView.snp_makeConstraints { (make) in
             make.top.left.right.equalTo(view)
             make.bottom.equalTo(toolBar.snp_top)
         }
+        lengthTipLabel.snp_makeConstraints { (make) in
+            make.right.bottom.equalTo(textView).offset(-8)
+        }
+        
     }
     
     private var toolBarBottom: Constraint? = nil
     private func prepareToolBar() {
-        view.addSubview(toolBar)
         toolBar.snp_makeConstraints { (make) in
             make.left.right.equalTo(view)
             make.height.equalTo(44)
@@ -128,27 +183,31 @@ class ComposeViewController: UIViewController {
         
     }
     
+    private lazy var pictureSelectorVC: YHImagePickerController = YHImagePickerController()
+    
     private lazy var emoticonVc: EmoticonViewController = EmoticonViewController {[weak self] (emoticon) in
         self?.textView.insertEmoticon(emoticon)
         
     }
     
+    func textViewDidChange(textView: UITextView) {
+        placeHolderLb.hidden = textView.hasText()
+        navigationItem.rightBarButtonItem?.enabled = textView.hasText()
+        let len = kStatusTextMaxLength - textView.emoticonStr.characters.count
+        lengthTipLabel.text = String(len)
+        lengthTipLabel.textColor = len < 0 ? UIColor.redColor() : UIColor.lightGrayColor()
+    }
+    
+    private lazy var placeHolderLb: UILabel = UILabel(color: UIColor.lightGrayColor(), fontSize: 17)
+    
     private lazy var textView: UITextView = {
        let textView = UITextView()
-        textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        textView.delegate = self
+        // 添加collectionview后 textview高度下降
+//        textView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         textView.alwaysBounceVertical = true
         textView.font = UIFont.systemFontOfSize(17)
         textView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.OnDrag
-        let placeHolderLb: UILabel = UILabel()
-        placeHolderLb.text = "分享新鲜事儿..."
-        placeHolderLb.textColor = UIColor.lightGrayColor()
-        placeHolderLb.font = UIFont.systemFontOfSize(17)
-        textView.addSubview(placeHolderLb)
-        placeHolderLb.snp_makeConstraints(closure: { (make) in
-            make.left.equalTo(5)
-            make.top.equalTo(8)
-        })
-        
         return textView
     }()
     
@@ -158,9 +217,11 @@ class ComposeViewController: UIViewController {
         return toolBar
     }()
 
+    private lazy var lengthTipLabel: UILabel = UILabel(color: UIColor.lightGrayColor(), fontSize: 14)
     
     deinit {
         removeKeyboardObserver()
+        print("销毁了.")
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
