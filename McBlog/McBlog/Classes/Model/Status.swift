@@ -25,20 +25,28 @@ class Status: NSObject {
                 return
             }
             storePicURLs = [NSURL]()
+            storePicLargeURLs = [NSURL]()
             
             for dict in pic_urls! {
                 if let urlString = dict["thumbnail_pic"] as? String {
                     storePicURLs?.append(NSURL(string: urlString)!)
+                    let largeString = urlString.stringByReplacingOccurrencesOfString("thumbnail", withString: "large")
+                    storePicLargeURLs?.append(NSURL(string: largeString)!)
+                    print(largeString)
                 }
             }
-            
         }
     }
     /// 存储配图数组
     var storePicURLs: [NSURL]?
+    /// 存储配图大图数组
+    var storePicLargeURLs: [NSURL]?
     /// 配图URLS
     var picURLs: [NSURL]? {
         return retweeted_status == nil ? storePicURLs : retweeted_status?.storePicURLs
+    }
+    var largePicURLs: [NSURL]? {
+        return retweeted_status == nil ? storePicLargeURLs : retweeted_status?.largePicURLs
     }
     /// 微博用户
     var user: User?

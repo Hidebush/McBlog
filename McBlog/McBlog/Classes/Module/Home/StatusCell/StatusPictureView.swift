@@ -9,6 +9,10 @@
 import UIKit
 import SDWebImage
 
+let YHStatusCellSelectedPictureNotification = "YHStatusCellSelectedPictureNotification"
+let YHStatusCellSelectedPictureURLKey = "YHStatusCellSelectedPictureURLKey"
+let YHStatusCellSelectedPictureIndexKey = "YHStatusCellSelectedPictureIndexKey"
+
 class StatusPictureView: UICollectionView {
 
     private let pictureViewCellId = "pictureViewCellId"
@@ -41,6 +45,7 @@ class StatusPictureView: UICollectionView {
             var size = CGSizeMake(150, 120)
             if let image = SDWebImageManager.sharedManager().imageCache.imageFromDiskCacheForKey(key) {
                 size = image.size
+                print(size)
                 size.width = size.width < 40 ? 40 : size.width
                 size.width = size.width > UIScreen.mainScreen().bounds.size.width ? 150 : size.width
             }
@@ -86,7 +91,8 @@ extension StatusPictureView: UICollectionViewDataSource, UICollectionViewDelegat
         return pictureCell
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        print(indexPath.item)
+//        print(status?.largePicURLs)
+        NSNotificationCenter.defaultCenter().postNotificationName(YHStatusCellSelectedPictureNotification, object: self, userInfo: [YHStatusCellSelectedPictureURLKey: status!.largePicURLs!, YHStatusCellSelectedPictureIndexKey: indexPath])
     }
     
 }
@@ -96,6 +102,7 @@ class PictureViewCell: UICollectionViewCell {
     var picUrl: NSURL? {
         didSet {
             pictureImageView.sd_setImageWithURL(picUrl)
+            gifImageView.hidden = (picUrl!.absoluteString as NSString).pathExtension.lowercaseString != "gif"
         }
     }
     
@@ -110,8 +117,12 @@ class PictureViewCell: UICollectionViewCell {
     
     private func setUpUI() {
         contentView.addSubview(pictureImageView)
+        contentView.addSubview(gifImageView)
         pictureImageView.snp_makeConstraints { (make) in
             make.edges.equalTo(contentView)
+        }
+        gifImageView.snp_makeConstraints { (make) in
+            make.right.bottom.equalTo(contentView)
         }
     }
     
@@ -121,6 +132,8 @@ class PictureViewCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         return imageView
     }()
+    
+    private lazy var gifImageView: UIImageView = UIImageView(image: UIImage(named: "timeline_image_gif"))
 }
 
 

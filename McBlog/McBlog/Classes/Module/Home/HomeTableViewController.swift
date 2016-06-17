@@ -36,6 +36,29 @@ class HomeTableViewController: BaseTableViewController {
         refreshControl?.addTarget(self, action: #selector(loadStatus), forControlEvents: UIControlEvents.ValueChanged)
         prepareTableView()
         loadStatus()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(presentPicture), name: YHStatusCellSelectedPictureNotification, object: nil)
+        
+    }
+    
+    @objc private func presentPicture(notification: NSNotification) {
+        print(notification)
+        guard let urls = notification.userInfo![YHStatusCellSelectedPictureURLKey] as? [NSURL] else {
+            print("URL数组不存在")
+            return
+        }
+        
+        guard let indexPath = notification.userInfo![YHStatusCellSelectedPictureIndexKey] as? NSIndexPath else {
+            print("选择index不存在")
+            return
+        }
+        
+        let pictureVC = PhotoBrowerController.init(urls: urls, index: indexPath.item)
+
+        pictureVC.transitioningDelegate = self
+        pictureVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        
+        presentViewController(pictureVC, animated: true, completion: nil)
     }
     
     private func prepareTableView() {
@@ -147,4 +170,96 @@ class HomeTableViewController: BaseTableViewController {
         return label
     }()
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    // 是否转场
+    private var isPresent : Bool = false
+    
 }
+
+
+extension HomeTableViewController: UIViewControllerTransitioningDelegate {
+    
+    /**
+     返回提供转场动画的对象   这个对象可以是任何一个对象 只要遵守了 UIViewControllerAnimatedTransitioning 协议
+     */
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        isPresent = true
+        
+        return self
+    }
+    
+    /**
+     返回提供解除动画的对象
+     */
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        isPresent = false
+        
+        return self
+    }
+    
+}
+
+extension HomeTableViewController: UIViewControllerAnimatedTransitioning {
+    
+    // 转场动画时长
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+        return 1.3
+    }
+    
+    /**
+     自定义转场动画  只要实现了此方法 就需要自己写动画
+     
+     - parameter transitionContext: 提供了转场动画所需要的元素
+     - transitionContext.completeTransition(true) 动画结束后必须调用
+     
+     - containerView() 容器视图
+     
+     - viewForKey      获取到转场的视图  ios8.0
+     */
+    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        
+        // MainViewController 弹出视图的控制器
+//        let fromVc = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+        // 要展现的控制器
+//        let toVc = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
+        
+        
+        if isPresent {
+            let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+            transitionContext.containerView()?.addSubview(toView)
+            
+            toView.alpha = 0.0
+            
+            UIView.animateWithDuration(transitionDuration(transitionContext), animations: {
+                toView.alpha = 1.0
+            }) { (_) in
+                
+                // 此方法必须实现（API 注明）
+                // 动画结束之后一定要执行，如果不执行，系统会一直等待，无法进行后续交互
+                
+                transitionContext.completeTransition(true)
+            }
+
+        } else {
+            // 解除转场的时候 fromVc 是 present出来的控制器  反了一下
+            let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
+            UIView.animateWithDuration(transitionDuration(transitionContext), animations: { 
+                fromView.alpha = 0.0
+                }, completion: { (_) in
+                    
+                    fromView.removeFromSuperview()
+                    // 解除转场 会把容器视图和内部视图 销毁
+                    transitionContext.completeTransition(true)
+            })
+
+        }
+
+    }
+}
+

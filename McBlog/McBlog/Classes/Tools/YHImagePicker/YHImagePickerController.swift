@@ -105,6 +105,7 @@ extension YHImagePickerController: UIImagePickerControllerDelegate, UINavigation
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         print("取消")
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

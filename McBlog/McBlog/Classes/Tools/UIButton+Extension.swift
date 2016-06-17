@@ -10,6 +10,15 @@ import Foundation
 import UIKit
 
 extension UIButton {
+    
+    convenience init(title: String, fontSize: CGFloat = 12, color: UIColor = UIColor.darkGrayColor(), backColor: UIColor = UIColor.whiteColor()) {
+        self.init()
+        setTitle(title, forState: UIControlState.Normal)
+        setTitleColor(color, forState: UIControlState.Normal)
+        titleLabel?.font = UIFont.systemFontOfSize(fontSize)
+        backgroundColor = backColor
+    }
+    
     convenience init(title: String, imageName: String, fontSize: CGFloat = 12, color: UIColor = UIColor.darkGrayColor()) {
         self.init()
         setTitle(title, forState: UIControlState.Normal)
